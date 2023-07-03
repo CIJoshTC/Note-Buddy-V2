@@ -28,6 +28,7 @@ app.post('/api/notes', (req, res) => {
 
     res.json(newNote);
 });
+  
 
 app.delete('/api/notes/:id', (req, res) => {
     const noteId = parseInt(req.params.id);
