@@ -1,46 +1,4 @@
-// let noteTitle;
-// let noteText;
-// let saveNoteBtn;
-// let newNoteBtn;
-// let noteList;
 
-// if (window.location.pathname === '/notes') {
-//   noteTitle = document.querySelector('.note-title');
-//   noteText = document.querySelector('.note-textarea');
-//   saveNoteBtn = document.querySelector('.save-note');
-//   newNoteBtn = document.querySelector('.new-note');
-//   noteList = document.querySelectorAll('.list-container .list-group');
-// }
-
-// // Show an element
-// const show = (elem) => {
-//   elem.style.display = 'inline';
-// };
-
-// // Hide an element
-// const hide = (elem) => {
-//   elem.style.display = 'none';
-// };
-
-// // activeNote is used to keep track of the note in the textarea
-// let activeNote = {};
-
-// const getNotes = () =>
-//   fetch('/api/notes', {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   });
-
-// const saveNote = (note) =>
-//   fetch('/api/notes', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(note),
-//   });
 let noteTitle;
 let noteText;
 let saveNoteBtn;
@@ -65,22 +23,43 @@ const hide = (elem) => {
 
 let activeNote = {};
 
-const getNotes = () => 
-  fetch('/api/notes', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-     },
-   });
+
+// Make API request to retrieve notes
+const getNotes = () =>
+  fetch('/api/notes')
+    .then((response) => response.json())
+    .then((data) => {
+      // Process the received notes data
+      // ...
+    })
+    .catch((error) => console.error(error));
+
+// Call the getNotes function to retrieve and process the notes
+getNotes();
+
 
 const saveNote = (note) =>
-     fetch('/api/notes', {
-     method: 'POST',
-     headers: {
-       'Content-Type': 'application/json',
+  fetch('/api/notes', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
     },
-     body: JSON.stringify(note),
-   });
+    body: JSON.stringify(note),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Process the response data
+      // ...
+    })
+    .catch((error) => console.error(error));
+
+// Example usage: create a new note and save it
+const newNote = {
+  title: 'Example Title',
+  text: 'Example Text',
+};
+
+saveNote(newNote);
 
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
@@ -158,9 +137,10 @@ const handleRenderSaveBtn = () => {
 
 // Render the list of note titles
 const renderNoteList = async (notes) => {
-  let jsonNotes = await notes.json();
+  // let jsonNotes = await notes.json();
   if (window.location.pathname === '/notes') {
-    noteList.forEach((el) => (el.innerHTML = ''));
+  noteList.innerHTML = '';
+  //  => (el.innerHTML = ''));
   }
 
   let noteListItems = [];
@@ -206,7 +186,7 @@ const renderNoteList = async (notes) => {
   });
 
   if (window.location.pathname === '/notes') {
-    noteListItems.forEach((note) => noteList[0].append(note));
+    noteListItems.forEach((note) => noteList.append(note));
   }
 };
 
