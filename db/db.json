@@ -1,1 +1,6 @@
-[{"title":"Test Title","text":"Test text"},{"title":"Example Title","text":"Example Text","id":1688679623786},{"title":"Example Title","text":"Example Text","id":1688679720690},{"title":"Example Title","text":"Example Text","id":1688679723566},{"title":"Example Title","text":"Example Text","id":1688679813773},{"title":"New Note","text":"New","id":1688680164222},{"title":"Example Title","text":"Example Text","id":1688680305422}]
+[
+    {
+        "title":"Test Title",
+        "text":"Test text"
+    }
+]

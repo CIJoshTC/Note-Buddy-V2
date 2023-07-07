@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const NoteQueries = require('./db/noteQueries')
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -36,10 +37,13 @@ app.post('/api/notes', (req, res) => {
 app.delete('/api/notes/:id', (req, res) => {
   const noteId = parseInt(req.params.id);
 
-  // const notes = JSON.parse(fs.readFileSync(path.join(__dirname, 'db', 'db.json')));
-
-
-  const updatedNotes = notes.filter((note) => note.id !== noteId);
+  NoteQueries.deleteNote(noteId)
+    .then(() => {
+      res.json({ ok: true })
+    })
+    .catch((err) => {
+      res.status(500).json(err)
+    })
 
 
   // fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(notes));
