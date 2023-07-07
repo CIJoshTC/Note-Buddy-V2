@@ -12,7 +12,7 @@ app.use(express.static('public'));
 
 
 app.get('/api/notes', (req, res) => {
-  // const notes = JSON.parse(fs.readFileSync(path.join(__dirname, 'db', 'db.json')));
+   const notes = JSON.parse(fs.readFileSync(path.join(__dirname, 'db', 'db.json')));
 
 
   res.json(notes);
@@ -21,14 +21,14 @@ app.get('/api/notes', (req, res) => {
 app.post('/api/notes', (req, res) => {
   const newNote = req.body;
 
-  // const notes = JSON.parse(fs.readFileSync(path.join(__dirname, 'db', 'db.json')));
+   const notes = JSON.parse(fs.readFileSync(path.join(__dirname, 'db', 'db.json')));
 
 
   newNote.id = Date.now();
 
   notes.push(newNote);
 
-  // fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(notes));
+   fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(notes));
 
   res.json(newNote);
 });
@@ -46,7 +46,7 @@ app.delete('/api/notes/:id', (req, res) => {
     })
 
 
-  // fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(notes));
+   fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(notes));
 
   res.sendStatus(204);
 });
